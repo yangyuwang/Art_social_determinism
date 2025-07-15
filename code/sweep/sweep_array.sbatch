@@ -6,9 +6,9 @@
 #SBATCH --array=0
 #SBATCH --nodes=1
 #SBATCH --constraint="gpu"
-#SBATCH --gres=gpu:a100:1
+#SBATCH --gres=gpu:a100:4
 #SBATCH --cpus-per-task=18
-#SBATCH --mem=125000
+#SBATCH --mem=0
 #SBATCH --time=20:00:00
 #SBATCH --mail-type=END
 #SBATCH --mail-user=ywang@mpib-berlin.mpg.de
@@ -39,7 +39,6 @@ accelerate launch --config_file /u/wangyd/.cache/huggingface/accelerate/default_
   --dataset_name "$FOLDER" \
   --image_column image \
   --caption_column text \
-  --dataloader_num_workers 4 \
   --output_dir "$OUTDIR" \
   --instance_prompt "painting <token>" \
   --mixed_precision fp16 \
