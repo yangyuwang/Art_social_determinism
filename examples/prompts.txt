@@ -1,0 +1,181 @@
+A painting of drooping pocket watches, distorted face, bare tree, distant cliffs under pale sky. <artist_salvador-dali> <gender_male> <year_1931> <loc_spain>
+A painting of drooping pocket watches, distorted face, bare tree, distant cliffs under pale sky. <artist_salvador-dali> <gender_male> <year_1931>
+A painting of drooping pocket watches, distorted face, bare tree, distant cliffs under pale sky. <artist_salvador-dali> <gender_male> <loc_spain>
+A painting of drooping pocket watches, distorted face, bare tree, distant cliffs under pale sky. <artist_salvador-dali> <year_1931> <loc_spain>
+A painting of drooping pocket watches, distorted face, bare tree, distant cliffs under pale sky. <gender_male> <year_1931> <loc_spain>
+A painting of drooping pocket watches, distorted face, bare tree, distant cliffs under pale sky. <artist_salvador-dali>
+A painting of drooping pocket watches, distorted face, bare tree, distant cliffs under pale sky. <gender_male>
+A painting of drooping pocket watches, distorted face, bare tree, distant cliffs under pale sky. <year_1931>
+A painting of drooping pocket watches, distorted face, bare tree, distant cliffs under pale sky. <loc_spain>
+<artist_salvador-dali> <gender_male> <year_1931> <loc_spain>
+A painting of swirling night sky, bright stars, crescent moon above tranquil village and tall cypress. <artist_vincent-van-gogh> <gender_male> <year_1889> <loc_france>
+A painting of swirling night sky, bright stars, crescent moon above tranquil village and tall cypress. <artist_vincent-van-gogh> <gender_male> <year_1889>
+A painting of swirling night sky, bright stars, crescent moon above tranquil village and tall cypress. <artist_vincent-van-gogh> <gender_male> <loc_france>
+A painting of swirling night sky, bright stars, crescent moon above tranquil village and tall cypress. <artist_vincent-van-gogh> <year_1889> <loc_france>
+A painting of swirling night sky, bright stars, crescent moon above tranquil village and tall cypress. <gender_male> <year_1889> <loc_france>
+A painting of swirling night sky, bright stars, crescent moon above tranquil village and tall cypress. <artist_vincent-van-gogh>
+A painting of swirling night sky, bright stars, crescent moon above tranquil village and tall cypress. <gender_male>
+A painting of swirling night sky, bright stars, crescent moon above tranquil village and tall cypress. <year_1889>
+A painting of swirling night sky, bright stars, crescent moon above tranquil village and tall cypress. <loc_france>
+<artist_vincent-van-gogh> <gender_male> <year_1889> <loc_france>
+A painting of enigmatic woman with faint smile, folded hands, dark dress before misty Tuscan landscape. <artist_leonardo-da-vinci> <gender_male> <year_1503> <loc_italy>
+A painting of enigmatic woman with faint smile, folded hands, dark dress before misty Tuscan landscape. <artist_leonardo-da-vinci> <gender_male> <year_1503>
+A painting of enigmatic woman with faint smile, folded hands, dark dress before misty Tuscan landscape. <artist_leonardo-da-vinci> <gender_male> <loc_italy>
+A painting of enigmatic woman with faint smile, folded hands, dark dress before misty Tuscan landscape. <artist_leonardo-da-vinci> <year_1503> <loc_italy>
+A painting of enigmatic woman with faint smile, folded hands, dark dress before misty Tuscan landscape. <gender_male> <year_1503> <loc_italy>
+A painting of enigmatic woman with faint smile, folded hands, dark dress before misty Tuscan landscape. <artist_leonardo-da-vinci>
+A painting of enigmatic woman with faint smile, folded hands, dark dress before misty Tuscan landscape. <gender_male>
+A painting of enigmatic woman with faint smile, folded hands, dark dress before misty Tuscan landscape. <year_1503>
+A painting of enigmatic woman with faint smile, folded hands, dark dress before misty Tuscan landscape. <loc_italy>
+<artist_leonardo-da-vinci> <gender_male> <year_1503> <loc_italy>
+A painting of anguished figure on bridge beneath blood‑red swirling sky, fjord and town receding. <artist_edvard-munch> <gender_male> <year_1893> <loc_norway>
+A painting of anguished figure on bridge beneath blood‑red swirling sky, fjord and town receding. <artist_edvard-munch> <gender_male> <year_1893>
+A painting of anguished figure on bridge beneath blood‑red swirling sky, fjord and town receding. <artist_edvard-munch> <gender_male> <loc_norway>
+A painting of anguished figure on bridge beneath blood‑red swirling sky, fjord and town receding. <artist_edvard-munch> <year_1893> <loc_norway>
+A painting of anguished figure on bridge beneath blood‑red swirling sky, fjord and town receding. <gender_male> <year_1893> <loc_norway>
+A painting of anguished figure on bridge beneath blood‑red swirling sky, fjord and town receding. <artist_edvard-munch>
+A painting of anguished figure on bridge beneath blood‑red swirling sky, fjord and town receding. <gender_male>
+A painting of anguished figure on bridge beneath blood‑red swirling sky, fjord and town receding. <year_1893>
+A painting of anguished figure on bridge beneath blood‑red swirling sky, fjord and town receding. <loc_norway>
+<artist_edvard-munch> <gender_male> <year_1893> <loc_norway>
+A painting of embracing couple cloaked in gilded mosaic patterns, stylised flowers, shimmering golden backdrop. <artist_gustav-klimt> <gender_male> <year_1908> <loc_austria>
+A painting of embracing couple cloaked in gilded mosaic patterns, stylised flowers, shimmering golden backdrop. <artist_gustav-klimt> <gender_male> <year_1908>
+A painting of embracing couple cloaked in gilded mosaic patterns, stylised flowers, shimmering golden backdrop. <artist_gustav-klimt> <gender_male> <loc_austria>
+A painting of embracing couple cloaked in gilded mosaic patterns, stylised flowers, shimmering golden backdrop. <artist_gustav-klimt> <year_1908> <loc_austria>
+A painting of embracing couple cloaked in gilded mosaic patterns, stylised flowers, shimmering golden backdrop. <gender_male> <year_1908> <loc_austria>
+A painting of embracing couple cloaked in gilded mosaic patterns, stylised flowers, shimmering golden backdrop. <artist_gustav-klimt>
+A painting of embracing couple cloaked in gilded mosaic patterns, stylised flowers, shimmering golden backdrop. <gender_male>
+A painting of embracing couple cloaked in gilded mosaic patterns, stylised flowers, shimmering golden backdrop. <year_1908>
+A painting of embracing couple cloaked in gilded mosaic patterns, stylised flowers, shimmering golden backdrop. <loc_austria>
+<artist_gustav-klimt> <gender_male> <year_1908> <loc_austria>
+A painting of stern farmer with pitchfork beside daughter before Carpenter Gothic house, drab rural setting. <artist_grant-wood> <gender_male> <year_1930> <loc_united_states>
+A painting of stern farmer with pitchfork beside daughter before Carpenter Gothic house, drab rural setting. <artist_grant-wood> <gender_male> <year_1930>
+A painting of stern farmer with pitchfork beside daughter before Carpenter Gothic house, drab rural setting. <artist_grant-wood> <gender_male> <loc_united_states>
+A painting of stern farmer with pitchfork beside daughter before Carpenter Gothic house, drab rural setting. <artist_grant-wood> <year_1930> <loc_united_states>
+A painting of stern farmer with pitchfork beside daughter before Carpenter Gothic house, drab rural setting. <gender_male> <year_1930> <loc_united_states>
+A painting of stern farmer with pitchfork beside daughter before Carpenter Gothic house, drab rural setting. <artist_grant-wood>
+A painting of stern farmer with pitchfork beside daughter before Carpenter Gothic house, drab rural setting. <gender_male>
+A painting of stern farmer with pitchfork beside daughter before Carpenter Gothic house, drab rural setting. <year_1930>
+A painting of stern farmer with pitchfork beside daughter before Carpenter Gothic house, drab rural setting. <loc_united_states>
+<artist_grant-wood> <gender_male> <year_1930> <loc_united_states>
+A painting of fragmented figures, screaming horse, fallen warrior in monochrome scene of war and chaos. <artist_pablo-picasso> <gender_male> <year_1937> <loc_spain>
+A painting of fragmented figures, screaming horse, fallen warrior in monochrome scene of war and chaos. <artist_pablo-picasso> <gender_male> <year_1937>
+A painting of fragmented figures, screaming horse, fallen warrior in monochrome scene of war and chaos. <artist_pablo-picasso> <gender_male> <loc_spain>
+A painting of fragmented figures, screaming horse, fallen warrior in monochrome scene of war and chaos. <artist_pablo-picasso> <year_1937> <loc_spain>
+A painting of fragmented figures, screaming horse, fallen warrior in monochrome scene of war and chaos. <gender_male> <year_1937> <loc_spain>
+A painting of fragmented figures, screaming horse, fallen warrior in monochrome scene of war and chaos. <artist_pablo-picasso>
+A painting of fragmented figures, screaming horse, fallen warrior in monochrome scene of war and chaos. <gender_male>
+A painting of fragmented figures, screaming horse, fallen warrior in monochrome scene of war and chaos. <year_1937>
+A painting of fragmented figures, screaming horse, fallen warrior in monochrome scene of war and chaos. <loc_spain>
+<artist_pablo-picasso> <gender_male> <year_1937> <loc_spain>
+A painting of nude Venus on scallop shell, Zephyrs blow roses, Horae offers cloak near shore. <artist_sandro-botticelli> <gender_male> <year_1486> <loc_italy>
+A painting of nude Venus on scallop shell, Zephyrs blow roses, Horae offers cloak near shore. <artist_sandro-botticelli> <gender_male> <year_1486>
+A painting of nude Venus on scallop shell, Zephyrs blow roses, Horae offers cloak near shore. <artist_sandro-botticelli> <gender_male> <loc_italy>
+A painting of nude Venus on scallop shell, Zephyrs blow roses, Horae offers cloak near shore. <artist_sandro-botticelli> <year_1486> <loc_italy>
+A painting of nude Venus on scallop shell, Zephyrs blow roses, Horae offers cloak near shore. <gender_male> <year_1486> <loc_italy>
+A painting of nude Venus on scallop shell, Zephyrs blow roses, Horae offers cloak near shore. <artist_sandro-botticelli>
+A painting of nude Venus on scallop shell, Zephyrs blow roses, Horae offers cloak near shore. <gender_male>
+A painting of nude Venus on scallop shell, Zephyrs blow roses, Horae offers cloak near shore. <year_1486>
+A painting of nude Venus on scallop shell, Zephyrs blow roses, Horae offers cloak near shore. <loc_italy>
+<artist_sandro-botticelli> <gender_male> <year_1486> <loc_italy>
+A painting of tranquil pond filled with floating water lilies, soft reflections, vibrant impressionist brushstrokes. <artist_claude-monet> <gender_male> <year_1920> <loc_france>
+A painting of tranquil pond filled with floating water lilies, soft reflections, vibrant impressionist brushstrokes. <artist_claude-monet> <gender_male> <year_1920>
+A painting of tranquil pond filled with floating water lilies, soft reflections, vibrant impressionist brushstrokes. <artist_claude-monet> <gender_male> <loc_france>
+A painting of tranquil pond filled with floating water lilies, soft reflections, vibrant impressionist brushstrokes. <artist_claude-monet> <year_1920> <loc_france>
+A painting of tranquil pond filled with floating water lilies, soft reflections, vibrant impressionist brushstrokes. <gender_male> <year_1920> <loc_france>
+A painting of tranquil pond filled with floating water lilies, soft reflections, vibrant impressionist brushstrokes. <artist_claude-monet>
+A painting of tranquil pond filled with floating water lilies, soft reflections, vibrant impressionist brushstrokes. <gender_male>
+A painting of tranquil pond filled with floating water lilies, soft reflections, vibrant impressionist brushstrokes. <year_1920>
+A painting of tranquil pond filled with floating water lilies, soft reflections, vibrant impressionist brushstrokes. <loc_france>
+<artist_claude-monet> <gender_male> <year_1920> <loc_france>
+A painting of hazy harbour at dawn, orange sun, small boats, industrial masts through blue‑grey mist. <artist_claude-monet> <gender_male> <year_1872> <loc_france>
+A painting of hazy harbour at dawn, orange sun, small boats, industrial masts through blue‑grey mist. <artist_claude-monet> <gender_male> <year_1872>
+A painting of hazy harbour at dawn, orange sun, small boats, industrial masts through blue‑grey mist. <artist_claude-monet> <gender_male> <loc_france>
+A painting of hazy harbour at dawn, orange sun, small boats, industrial masts through blue‑grey mist. <artist_claude-monet> <year_1872> <loc_france>
+A painting of hazy harbour at dawn, orange sun, small boats, industrial masts through blue‑grey mist. <gender_male> <year_1872> <loc_france>
+A painting of hazy harbour at dawn, orange sun, small boats, industrial masts through blue‑grey mist. <artist_claude-monet>
+A painting of hazy harbour at dawn, orange sun, small boats, industrial masts through blue‑grey mist. <gender_male>
+A painting of hazy harbour at dawn, orange sun, small boats, industrial masts through blue‑grey mist. <year_1872>
+A painting of hazy harbour at dawn, orange sun, small boats, industrial masts through blue‑grey mist. <loc_france>
+<artist_claude-monet> <gender_male> <year_1872> <loc_france>
+A painting of Christ and apostles gathered at long table, dramatic gesture, perspective leads eye inward. <artist_leonardo-da-vinci> <gender_male> <year_1498> <loc_italy>
+A painting of Christ and apostles gathered at long table, dramatic gesture, perspective leads eye inward. <artist_leonardo-da-vinci> <gender_male> <year_1498>
+A painting of Christ and apostles gathered at long table, dramatic gesture, perspective leads eye inward. <artist_leonardo-da-vinci> <gender_male> <loc_italy>
+A painting of Christ and apostles gathered at long table, dramatic gesture, perspective leads eye inward. <artist_leonardo-da-vinci> <year_1498> <loc_italy>
+A painting of Christ and apostles gathered at long table, dramatic gesture, perspective leads eye inward. <gender_male> <year_1498> <loc_italy>
+A painting of Christ and apostles gathered at long table, dramatic gesture, perspective leads eye inward. <artist_leonardo-da-vinci>
+A painting of Christ and apostles gathered at long table, dramatic gesture, perspective leads eye inward. <gender_male>
+A painting of Christ and apostles gathered at long table, dramatic gesture, perspective leads eye inward. <year_1498>
+A painting of Christ and apostles gathered at long table, dramatic gesture, perspective leads eye inward. <loc_italy>
+<artist_leonardo-da-vinci> <gender_male> <year_1498> <loc_italy>
+A painting of Spanish infanta with maids, dwarf, giant canvas, mirror reflecting king and queen. <artist_diego-velazquez> <gender_male> <year_1656> <loc_spain>
+A painting of Spanish infanta with maids, dwarf, giant canvas, mirror reflecting king and queen. <artist_diego-velazquez> <gender_male> <year_1656>
+A painting of Spanish infanta with maids, dwarf, giant canvas, mirror reflecting king and queen. <artist_diego-velazquez> <gender_male> <loc_spain>
+A painting of Spanish infanta with maids, dwarf, giant canvas, mirror reflecting king and queen. <artist_diego-velazquez> <year_1656> <loc_spain>
+A painting of Spanish infanta with maids, dwarf, giant canvas, mirror reflecting king and queen. <gender_male> <year_1656> <loc_spain>
+A painting of Spanish infanta with maids, dwarf, giant canvas, mirror reflecting king and queen. <artist_diego-velazquez>
+A painting of Spanish infanta with maids, dwarf, giant canvas, mirror reflecting king and queen. <gender_male>
+A painting of Spanish infanta with maids, dwarf, giant canvas, mirror reflecting king and queen. <year_1656>
+A painting of Spanish infanta with maids, dwarf, giant canvas, mirror reflecting king and queen. <loc_spain>
+<artist_diego-velazquez> <gender_male> <year_1656> <loc_spain>
+A painting of personified Liberty holding tricolour, musket, charging over barricade with revolutionaries and smoke. <artist_eugene-delacroix> <gender_male> <year_1830> <loc_france>
+A painting of personified Liberty holding tricolour, musket, charging over barricade with revolutionaries and smoke. <artist_eugene-delacroix> <gender_male> <year_1830>
+A painting of personified Liberty holding tricolour, musket, charging over barricade with revolutionaries and smoke. <artist_eugene-delacroix> <gender_male> <loc_france>
+A painting of personified Liberty holding tricolour, musket, charging over barricade with revolutionaries and smoke. <artist_eugene-delacroix> <year_1830> <loc_france>
+A painting of personified Liberty holding tricolour, musket, charging over barricade with revolutionaries and smoke. <gender_male> <year_1830> <loc_france>
+A painting of personified Liberty holding tricolour, musket, charging over barricade with revolutionaries and smoke. <artist_eugene-delacroix>
+A painting of personified Liberty holding tricolour, musket, charging over barricade with revolutionaries and smoke. <gender_male>
+A painting of personified Liberty holding tricolour, musket, charging over barricade with revolutionaries and smoke. <year_1830>
+A painting of personified Liberty holding tricolour, musket, charging over barricade with revolutionaries and smoke. <loc_france>
+<artist_eugene-delacroix> <gender_male> <year_1830> <loc_france>
+A painting of God reaching through cloud toward reclining Adam, near‑touching fingers amid sculptural nudes. <artist_michelangelo> <gender_male> <year_1512> <loc_italy>
+A painting of God reaching through cloud toward reclining Adam, near‑touching fingers amid sculptural nudes. <artist_michelangelo> <gender_male> <year_1512>
+A painting of God reaching through cloud toward reclining Adam, near‑touching fingers amid sculptural nudes. <artist_michelangelo> <gender_male> <loc_italy>
+A painting of God reaching through cloud toward reclining Adam, near‑touching fingers amid sculptural nudes. <artist_michelangelo> <year_1512> <loc_italy>
+A painting of God reaching through cloud toward reclining Adam, near‑touching fingers amid sculptural nudes. <gender_male> <year_1512> <loc_italy>
+A painting of God reaching through cloud toward reclining Adam, near‑touching fingers amid sculptural nudes. <artist_michelangelo>
+A painting of God reaching through cloud toward reclining Adam, near‑touching fingers amid sculptural nudes. <gender_male>
+A painting of God reaching through cloud toward reclining Adam, near‑touching fingers amid sculptural nudes. <year_1512>
+A painting of God reaching through cloud toward reclining Adam, near‑touching fingers amid sculptural nudes. <loc_italy>
+<artist_michelangelo> <gender_male> <year_1512> <loc_italy>
+A painting of Parisians relaxing on riverbank, parasols, top hats, pointillist dots bathed in afternoon light. <artist_georges-seurat> <gender_male> <year_1886> <loc_france>
+A painting of Parisians relaxing on riverbank, parasols, top hats, pointillist dots bathed in afternoon light. <artist_georges-seurat> <gender_male> <year_1886>
+A painting of Parisians relaxing on riverbank, parasols, top hats, pointillist dots bathed in afternoon light. <artist_georges-seurat> <gender_male> <loc_france>
+A painting of Parisians relaxing on riverbank, parasols, top hats, pointillist dots bathed in afternoon light. <artist_georges-seurat> <year_1886> <loc_france>
+A painting of Parisians relaxing on riverbank, parasols, top hats, pointillist dots bathed in afternoon light. <gender_male> <year_1886> <loc_france>
+A painting of Parisians relaxing on riverbank, parasols, top hats, pointillist dots bathed in afternoon light. <artist_georges-seurat>
+A painting of Parisians relaxing on riverbank, parasols, top hats, pointillist dots bathed in afternoon light. <gender_male>
+A painting of Parisians relaxing on riverbank, parasols, top hats, pointillist dots bathed in afternoon light. <year_1886>
+A painting of Parisians relaxing on riverbank, parasols, top hats, pointillist dots bathed in afternoon light. <loc_france>
+<artist_georges-seurat> <gender_male> <year_1886> <loc_france>
+A painting of late‑night diner with lone patrons, fluorescent glow, empty city streets and glass corner. <artist_edward-hopper> <gender_male> <year_1942> <loc_united_states>
+A painting of late‑night diner with lone patrons, fluorescent glow, empty city streets and glass corner. <artist_edward-hopper> <gender_male> <year_1942>
+A painting of late‑night diner with lone patrons, fluorescent glow, empty city streets and glass corner. <artist_edward-hopper> <gender_male> <loc_united_states>
+A painting of late‑night diner with lone patrons, fluorescent glow, empty city streets and glass corner. <artist_edward-hopper> <year_1942> <loc_united_states>
+A painting of late‑night diner with lone patrons, fluorescent glow, empty city streets and glass corner. <gender_male> <year_1942> <loc_united_states>
+A painting of late‑night diner with lone patrons, fluorescent glow, empty city streets and glass corner. <artist_edward-hopper>
+A painting of late‑night diner with lone patrons, fluorescent glow, empty city streets and glass corner. <gender_male>
+A painting of late‑night diner with lone patrons, fluorescent glow, empty city streets and glass corner. <year_1942>
+A painting of late‑night diner with lone patrons, fluorescent glow, empty city streets and glass corner. <loc_united_states>
+<artist_edward-hopper> <gender_male> <year_1942> <loc_united_states>
+A painting of lively outdoor dance, dappled sunlight, elegant Parisians mingling, blue dresses, straw hats. <artist_pierre-auguste-renoir> <gender_male> <year_1876> <loc_france>
+A painting of lively outdoor dance, dappled sunlight, elegant Parisians mingling, blue dresses, straw hats. <artist_pierre-auguste-renoir> <gender_male> <year_1876>
+A painting of lively outdoor dance, dappled sunlight, elegant Parisians mingling, blue dresses, straw hats. <artist_pierre-auguste-renoir> <gender_male> <loc_france>
+A painting of lively outdoor dance, dappled sunlight, elegant Parisians mingling, blue dresses, straw hats. <artist_pierre-auguste-renoir> <year_1876> <loc_france>
+A painting of lively outdoor dance, dappled sunlight, elegant Parisians mingling, blue dresses, straw hats. <gender_male> <year_1876> <loc_france>
+A painting of lively outdoor dance, dappled sunlight, elegant Parisians mingling, blue dresses, straw hats. <artist_pierre-auguste-renoir>
+A painting of lively outdoor dance, dappled sunlight, elegant Parisians mingling, blue dresses, straw hats. <gender_male>
+A painting of lively outdoor dance, dappled sunlight, elegant Parisians mingling, blue dresses, straw hats. <year_1876>
+A painting of lively outdoor dance, dappled sunlight, elegant Parisians mingling, blue dresses, straw hats. <loc_france>
+<artist_pierre-auguste-renoir> <gender_male> <year_1876> <loc_france>
+A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <artist_raphael> <gender_male> <year_1511> <loc_italy>
+A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <artist_raphael> <gender_male> <year_1511>
+A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <artist_raphael> <gender_male> <loc_italy>
+A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <artist_raphael> <year_1511> <loc_italy>
+A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <gender_male> <year_1511> <loc_italy>
+A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <artist_raphael>
+A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <gender_male>
+A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <year_1511>
+A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <loc_italy>
+<artist_raphael> <gender_male> <year_1511> <loc_italy>
+

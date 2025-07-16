@@ -130,27 +130,27 @@ for artist, image_n, year in zip(artwork["Artist_name"], artwork["image_n"], art
             token_list_clean = ["_".join(token.split(" ")) for token in token_list]
             special_token.update(token_list_clean)
             counts.update(token_list_clean)
-            caption = f"A painting of {content_clean[str(int(image_n))]} {' '.join(token_list_clean)}"
-            all_entries.append({
-                "file_name": str(image_path),
-                "text": caption
-                })
+            # caption = f"A painting of {content_clean[str(int(image_n))]} {' '.join(token_list_clean)}"
+            #all_entries.append({
+            #    "file_name": str(image_path),
+            #    "text": caption
+            #    })
 
             # combinations of tokens
-            #token_pairs = list(combinations(token_list_clean, 2))
-            #shuffle(token_pairs)
+            token_pairs = list(combinations(token_list_clean, 2))
+            shuffle(token_pairs)
 
-            #if len(token_pairs) >= 3:
-            #    max_prompts_per_image = 3
-            #else:
-            #    max_prompts_per_image = len(token_pairs)
+            if len(token_pairs) >= 5:
+                max_prompts_per_image = 5
+            else:
+                max_prompts_per_image = len(token_pairs)
 
-            #for pair in token_pairs[:max_prompts_per_image]:
-            #    caption = f"A painting of {content_clean[str(int(image_n))]} {' '.join(pair)}"
-            #    all_entries.append({
-            #        "file_name": str(image_path),
-            #        "text": caption
-            #    })
+            for pair in token_pairs[:max_prompts_per_image]:
+                caption = f"A painting of {content_clean[str(int(image_n))]} {' '.join(pair)}"
+                all_entries.append({
+                    "file_name": str(image_path),
+                    "text": caption
+                })
 
 shuffle(all_entries)
 
