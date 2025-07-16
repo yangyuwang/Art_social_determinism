@@ -34,7 +34,7 @@ mkdir -p "$OUTDIR"
 
 # Run training
 accelerate launch --config_file /u/wangyd/.cache/huggingface/accelerate/default_config.yaml \
-  ~/diffusers/examples/dreambooth/modified_train_dreambooth_lora_sd3.py \
+  modified_train_dreambooth_lora_sd3.py \
   --pretrained_model_name_or_path "$MODEL_PATH" \
   --dataset_name "$FOLDER" \
   --image_column image \
