@@ -178,4 +178,3 @@ A painting of classical philosophers debating under grand arches, Plato and Aris
 A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <year_1511>
 A painting of classical philosophers debating under grand arches, Plato and Aristotle central, marble statues and vaults. <loc_italy>
 <artist_raphael> <gender_male> <year_1511> <loc_italy>
-
