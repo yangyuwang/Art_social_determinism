@@ -3,3 +3,11 @@ art_soc/
 wandb/
 
 check_tokens.py
+
+quali_validation/
+
+sweep_params.txt
+
+examples/
+
+model/
