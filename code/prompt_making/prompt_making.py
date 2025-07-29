@@ -7,30 +7,29 @@ import numpy as np
 from itertools import combinations
 from random import shuffle, seed
 import os
-# from transformers import (
-#     CLIPTokenizer, CLIPTextModel, T5TokenizerFast, 
-#     T5EncoderModel, PretrainedConfig,
-# )
+from transformers import (
+    CLIPTokenizer, CLIPTextModelWithProjection, T5TokenizerFast, 
+    T5EncoderModel, PretrainedConfig,
+)
 
-# from diffusers import StableDiffusion3Pipeline
-# import torch
+from diffusers import StableDiffusion3Pipeline
+import torch
 
 np.random.seed(42)
 seed(42)
 
-# base_model = "stabilityai/stable-diffusion-3-medium-diffusers"
-# target_dir = Path("/u/wangyd/sd3-custom")
+base_model = "stabilityai/stable-diffusion-3-medium-diffusers"
+target_dir = Path("/u/wangyd/sd3-custom")
 
-# print("Loading SD3 pipeline...")
-# pipe = StableDiffusion3Pipeline.from_pretrained(
-#     base_model,
-#     torch_dtype=torch.float16,
-#     variant="fp16"
-# )
+print("Loading SD3 pipeline...")
+pipe = StableDiffusion3Pipeline.from_pretrained(
+    base_model,
+    torch_dtype=torch.float16,
+    variant="fp16"
+)
 
-# pipe.save_pretrained(target_dir)
-
-# print("model saved!")
+pipe.save_pretrained(target_dir)
+print("model saved!")
 
 # Demographic Info
 path_info = Path("/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/demographic_information.json") 
@@ -270,6 +269,14 @@ with open("/u/wangyd/mpib/chm-artistic-social-determinism/Data/special_token_dic
 for tk, n in counts.most_common(10):
    print(f"{tk:20} {n}")
 
+# tokenizer = pipe.tokenizer
+# print(f"➕ Adding {len(special_token)} special tokens...")
+# num_added = tokenizer.add_tokens(list(special_token))
+# pipe.text_encoder.resize_token_embeddings(len(tokenizer))
+
+# tokenizer.save_pretrained(f"{target_dir}/tokenizer")
+# pipe.text_encoder.save_pretrained(f"{target_dir}/text_encoder")
+
 # tokenizer = CLIPTokenizer.from_pretrained(target_dir / "tokenizer")
 # print(f"➕ Adding {len(special_token)} special tokens...")
 # num_added = tokenizer.add_tokens(list(special_token))
@@ -290,66 +297,68 @@ for tk, n in counts.most_common(10):
 
 # pipe.save_pretrained("/u/wangyd/sd3-custom")
 
-# print("Done! Model with injected tokens saved to:")
-# print(f"   {target_dir}")
+print("Done! Model with injected tokens saved to:")
+print(f"   {target_dir}")
 
-# def inject_special_tokens(
-#     model_root: str | Path,
-#     special_tokens: list[str] | set[str],
-#     *,
-#     suffixes: tuple[str, ...] = ("", "_2", "_3"),   # check tokenizers, tokenizer_2, tokenizer_3
-# ) -> None:
-#     """
-#     Add `special_tokens` to every tokenizer inside an SD3 checkpoint and
-#     resize the corresponding text‑encoder embedding layers.
+def inject_special_tokens(
+    model_root: str | Path,
+    special_tokens: list[str] | set[str],
+    *,
+    suffixes: tuple[str, ...] = ("", "_2"),   # check tokenizers, tokenizer_2
+) -> None:
+    """
+    Add `special_tokens` to every tokenizer inside an SD3 checkpoint and
+    resize the corresponding text‑encoder embedding layers.
 
-#     Parameters
-#     ----------
-#     model_root : str | Path
-#         Folder that contains sub‑folders like `tokenizer`, `tokenizer_2`,
-#         `text_encoder`, `text_encoder_2`, …
-#     special_tokens : list[str] | set[str]
-#         Tokens you want to inject (must be strings without spaces).
-#     suffixes : tuple[str, ...], optional
-#         Which suffixes to try.  Default ("", "_2", "_3") covers
-#         tokenizer, tokenizer_2, tokenizer_3.
-#     """
-#     model_root = Path(model_root)
+    Parameters
+    ----------
+    model_root : str | Path
+        Folder that contains sub‑folders like `tokenizer`, `tokenizer_2`,
+        `text_encoder`, `text_encoder_2`, …
+    special_tokens : list[str] | set[str]
+        Tokens you want to inject (must be strings without spaces).
+    suffixes : tuple[str, ...], optional
+        Which suffixes to try.  Default ("", "_2", "_3") covers
+        tokenizer, tokenizer_2, tokenizer_3.
+    """
+    model_root = Path(model_root)
 
-#     for suff in suffixes:
-#         tok_dir = model_root / f"tokenizer{suff}"
-#         enc_dir = model_root / f"text_encoder{suff}"
-#         if not tok_dir.exists() or not enc_dir.exists():
-#             # Skip if that pair doesn't exist in this checkpoint
-#             continue
+    for suff in suffixes:
+        tok_dir = model_root / f"tokenizer{suff}"
+        enc_dir = model_root / f"text_encoder{suff}"
+        if not tok_dir.exists() or not enc_dir.exists():
+            # Skip if that pair doesn't exist in this checkpoint
+            continue
 
-#         # ---------- Detect whether this pair is CLIP or T5 ----------
-#         cfg = PretrainedConfig.from_pretrained(enc_dir)
-#         arch = cfg.architectures[0]
+        # ---------- Detect whether this pair is CLIP or T5 ----------
+        cfg = PretrainedConfig.from_pretrained(enc_dir)
+        arch = cfg.architectures[0]
 
-#         if arch.startswith("CLIP"):
-#             TokCls, EncCls = CLIPTokenizer, CLIPTextModel
-#         elif arch.startswith("T5"):
-#             TokCls, EncCls = T5TokenizerFast, T5EncoderModel
-#         else:
-#             print(f"Unknown architecture {arch} in {enc_dir}, skipping.")
-#             continue
+        if arch.startswith("CLIP"):
+            TokCls, EncCls = CLIPTokenizer, CLIPTextModelWithProjection
+        elif arch.startswith("T5"):
+            TokCls, EncCls = T5TokenizerFast, T5EncoderModel
+        else:
+            print(f"Unknown architecture {arch} in {enc_dir}, skipping.")
+            continue
 
-#         print(f"Updating {tok_dir.name} / {enc_dir.name} ({arch})")
+        print(f"Updating {tok_dir.name} / {enc_dir.name} ({arch})")
 
-#         tokenizer = TokCls.from_pretrained(tok_dir)
-#         n_added = tokenizer.add_tokens(list(special_tokens))
-#         if n_added == 0:
-#             print("all tokens already present, nothing to do.")
-#             continue
+        tokenizer = TokCls.from_pretrained(tok_dir)
+        n_added = tokenizer.add_tokens(list(special_tokens))
+        if n_added == 0:
+            print("all tokens already present, nothing to do.")
+            continue
 
-#         text_encoder = EncCls.from_pretrained(enc_dir)
-#         text_encoder.resize_token_embeddings(len(tokenizer))
+        text_encoder = EncCls.from_pretrained(enc_dir)
+        text_encoder.resize_token_embeddings(len(tokenizer))
 
-#         tokenizer.save_pretrained(tok_dir)
-#         text_encoder.save_pretrained(enc_dir)
-#         print(f"added {n_added} tokens; new vocab size: {len(tokenizer)}")
+        tokenizer.save_pretrained(tok_dir)
+        text_encoder.save_pretrained(enc_dir)
+        print(f"added {n_added} tokens; new vocab size: {len(tokenizer)}")
+        break
 
-#     print("All available tokenizers updated.\n")
+    print("All available tokenizers updated.\n")
 
-# inject_special_tokens(target_dir, special_token)
+inject_special_tokens(target_dir, special_token)
+

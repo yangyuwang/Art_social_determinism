@@ -54,7 +54,7 @@ import argparse, json, accelerate
 import os
 from pathlib import Path
 from typing import Dict, List, Union
-
+from safetensors.torch import load_file
 import itertools
 import re
 
@@ -149,7 +149,9 @@ def main() -> None:
         base, torch_dtype=torch.float16,
     ).to(device)
 
+    # Load LoRA weights manually
     pipe.load_lora_weights(args.lora_dir)
+
     pipe.set_progress_bar_config(disable=True)
 
     # 3) ─── CLIP model (ViT‑L/14) ────────────────────────────────────────────
@@ -171,7 +173,7 @@ def main() -> None:
             clip_pre(real_img).unsqueeze(0).to("cuda")
         ).float()
 
-        tokens = rec["tokens"]
+        tokens = rec["metadata"]
         rng = random.Random(args.seed + idx)
         tokens_one = _sample_one(tokens, rng)
         content    = rec["content"].strip()
@@ -184,14 +186,14 @@ def main() -> None:
             if net_token:
                 prompt_dict = {
                     "A": "A painting",
-                    "C": content,
-                    "T1": f"{content} {_get_token(t, 'year')}",
-                    "T2": f"{content} {_get_token(t, 'style')}",
-                    "T3": f"{content} {_get_token(t, 'gender')}",
-                    "T4": f"{content} {_get_token(t, 'loc')}",
-                    "T5": f"{content} {_get_token(t, 'net')}",
-                    "T6": f"{content} {_get_token(t, 'artist')}",
-                    "T_all": f"{content} {' '.join(_flatten_tokens(t))}",
+                    "C": f"{content}.",
+                    "T1": f"{content} by the artist {_get_token(t, 'year')}.",
+                    "T2": f"{content} by the artist {_get_token(t, 'style')}.",
+                    "T3": f"{content} by the artist {_get_token(t, 'gender')}.",
+                    "T4": f"{content} by the artist {_get_token(t, 'loc')}.",
+                    "T5": f"{content} by the artist  {_get_token(t, 'net')}.",
+                    "T6": f"{content} by the artist  {_get_token(t, 'artist')}.",
+                    "T_all": f"{content} by the artist {' '.join(_flatten_tokens(t))}.",
                 }
             else:
                 prompt_dict = {

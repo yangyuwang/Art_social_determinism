@@ -1,8 +1,8 @@
 #!/bin/bash -l
 
-#SBATCH --job-name=sd3_train_lora
-#SBATCH --output=/ptmp/wangyd/out/sd3_train_lora.out
-#SBATCH --error=/ptmp/wangyd/err/sd3_train_lora.err
+#SBATCH --job-name=sd3_train_lora_natural
+#SBATCH --output=/ptmp/wangyd/out/sd3_train_lora_natural.out
+#SBATCH --error=/ptmp/wangyd/err/sd3_train_lora_natural.err
 #SBATCH --nodes=1
 #SBATCH --constraint="gpu"
 #SBATCH --gres=gpu:a100:4
@@ -23,13 +23,13 @@ source ~/mpib/chm-artistic-social-determinism/Art_social_determinism/art_soc/bin
 # Set paths
 export WANDB_PROJECT=artistic_social_determinism
 export WANDB_ENTITY=yangyud01-university-of-chicago
-export MODEL_PATH=/u/wangyd/sd3-custom
+export MODEL_PATH=stabilityai/stable-diffusion-3-medium-diffusers
 export HF_DATASETS_CACHE="/ptmp/$USER/hf_cache_$SLURM_JOB_ID"
 
 FOLDER=/u/wangyd/mpib/chm-artistic-social-determinism/Data/dreambooth_dataset
 #shuf -n 1000 --random-source=<(yes 42) $CAPTIONS > /ptmp/wangyd/captions_1000.jsonl
 
-OUTDIR=/ptmp/wangyd/sd3_lora_runs/run_lora_$SLURM_JOB_ID
+OUTDIR=/ptmp/wangyd/sd3_lora_runs/run_lora_natural_$SLURM_JOB_ID
 mkdir -p "$OUTDIR"
 
 # Run training
@@ -50,7 +50,7 @@ accelerate launch --config_file /u/wangyd/.cache/huggingface/accelerate/default_
   --seed 42 \
   --max_train_steps 40000 \
   --checkpointing_steps 500 \
-  --validation_prompt "A painting of a swirling night sky, bright stars, crescent moon over a quiet village landscape.<loc_Saint-rémy-de-provence> <loc_France> <year_1889> <gender_male> <artist_vincent_van_gogh>" \
+  --validation_prompt "A painting of a swirling night sky, bright stars, crescent moon over a quiet village landscape by the artist Vincent van Gogh in the place of France" \
   --validation_epochs 25 \
   --report_to wandb \
   --train_text_encoder \
