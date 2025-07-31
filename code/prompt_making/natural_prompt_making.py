@@ -5,21 +5,23 @@ from collections import Counter
 import re
 import numpy as np
 from itertools import combinations
-from random import shuffle, seed
 import os
-from random import shuffle, seed
-
+from random import shuffle, seed, sample
+import random
+from tqdm import tqdm
 from collections import defaultdict
 
 np.random.seed(42)
 seed(42)
 
 # Paths
+# Paths
 artwork_path = Path("/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/artwork_data_merged.csv")
 path_info = Path("/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/demographic_information.json")
-path_content = Path("/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/painting_content.jsonl")
 jsonl_out = Path("/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/dreambooth_dataset/train/metadata.jsonl")
 jsonl_out_full = Path("/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/natural_prompt_dataset/full.jsonl")
+output_path = Path("/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/natural_prompt_dataset/special_token_dict.json")
+
 
 os.makedirs("/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/natural_prompt_dataset", exist_ok=True)
 
@@ -27,13 +29,14 @@ os.makedirs("/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/natural_p
 with path_info.open(encoding="utf-8") as f:
     data_info = json.load(f)
 
-content = dict()
-with path_content.open() as f:
-    for line in f:
-        if line.strip():
-            content.update(json.loads(line))
-
-content_clean = {k: re.search(r'This painting depicts (.+?)\.', c).group(1)  for k, c in content.items() if re.search(r'This painting depicts (.+?)\.', c)}
+# Load painting_content_{i}.jsonl files
+content = {}
+for i in range(8):
+    path_content = Path(f"/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/painting_content_{i}.jsonl")
+    with path_content.open() as f:
+        for line in f:
+            if line.strip():
+                content.update(json.loads(line))
 
 artwork = pd.read_csv(artwork_path)
 valid_years = artwork["Year"].dropna().astype(str).str.strip()
@@ -103,128 +106,115 @@ for k, v in data_info.items():
 all_entries = []
 all_entries_full = []
 special_token_dict = defaultdict(set)
-
-n = 0
+n_images = 0
 
 # Main loop
-for artist, image_n, year, styles in zip(artwork["Artist_name"], artwork["image_n"], artwork["Year"], artwork["Style"]):
-   if str(year).strip().isdigit() and int(year) >= 1400 and pd.notna(image_n):
-        
+for artist, image_n, year, styles in tqdm(zip(artwork["Artist_name"], artwork["image_n"], artwork["Year"], artwork["Style"])):
+    if str(year).strip().isdigit() and int(year) >= 1400 and pd.notna(image_n):
         artist = re.sub(r"^en/", "", str(artist))
         real_year = int(year)
         count_in_year = year_counts[real_year]
         std_dev = max(1, 5 / (count_in_year**0.5))
         sampled_year = int(np.random.normal(loc=real_year, scale=std_dev))
-        if sampled_year < 1400: sampled_year = 1400
-        if sampled_year > 2024: sampled_year = 2024
+        sampled_year = max(1400, min(sampled_year, 2024))
 
-        if data_info.get(artist, None) and content_clean.get(str(int(image_n)), None):
-            n += 1
+        img_id_str = str(int(image_n))
+        if data_info.get(artist) and img_id_str in content:
+            n_images += 1
             token_dict = {}
-            image_path = Path(f"{str(int(image_n))}.jpg")
-            image_path_full = Path(
-                f"/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/dreambooth_dataset/train/{str(int(image_n))}.jpg"
-            )
+            image_path = Path(f"{img_id_str}.jpg")
+            image_path_full = Path(f"/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/dreambooth_dataset/train/{img_id_str}.jpg")
 
-            phrases = [
-                f"{' '.join(part.capitalize() for part in artist.split('-'))}"
-            ]
-            token_dict["artist"] = f"{' '.join(part.capitalize() for part in artist.split('-'))}"
-            special_token_dict["artist"].add(f"{' '.join(part.capitalize() for part in artist.split('-'))}")
+            tokens = []
+
+            # Artist
+            artist_tok = ' '.join(part.capitalize() for part in artist.split('-'))
+            tokens.append(artist_tok)
+            token_dict["artist"] = artist_tok
+            special_token_dict["artist"].add(artist_tok)
 
             # Gender
             gender = artist_gender_dict.get(artist)
             if gender:
-                phrases.append(f"as {gender.lower()}")
-                token_dict["gender"] = f"as {gender.lower()}"
-                special_token_dict["gender"].add(f"as {gender.lower()}")
-            
-            phrases.append(f"in the year of {sampled_year}")
-            token_dict["year"] = f"in the year of {sampled_year}"
-            special_token_dict["year"].add(f"in the year of {sampled_year}")
+                gender_tok = f"as {gender.lower()}"
+                tokens.append(gender_tok)
+                token_dict["gender"] = gender_tok
+                special_token_dict["gender"].add(gender_tok)
+
+            # Year
+            year_tok = f"in the year of {sampled_year}"
+            tokens.append(year_tok)
+            token_dict["year"] = year_tok
+            special_token_dict["year"].add(year_tok)
 
             # Style
             if pd.notna(styles):
-                style_col = []
-                for style in styles.split("|"):
-                    clean = re.sub(r"\s*\(.*?\)", "", style).strip()
-                    style_col.append(clean)
-                
-                if style_col:
-                    phrases.append(f"in the style of {', '.join(style_col)}")
-                    token_dict["style"] = f"in the style of {', '.join(style_col)}"
-                    special_token_dict["style"].add(f"in the style of {', '.join(style_col)}")
+                style_lst = [re.sub(r"\\s*\\(.*?\\)", "", s).strip() for s in styles.split("|")]
+                if style_lst:
+                    style_tok = f"in the style of {', '.join(style_lst)}"
+                    tokens.append(style_tok)
+                    token_dict["style"] = style_tok
+                    special_token_dict["style"].add(style_tok)
 
             # Location
             loc_years = artist_loc_dict.get(artist, {})
             if real_year in loc_years:
-                loc_col = []
-                for loc in loc_years[real_year]:
-                    if loc and loc.lower() != "n/a":
-                        loc_col.append(loc.replace('.', '').replace(',', '').strip())
-                
-                if loc_col:
-                    phrases.append(f"in the place of {', '.join(loc_col)}")
-                    token_dict["loc"] = f"in the place of {', '.join(loc_col)}"
-                    special_token_dict["loc"].add(f"in the place of {', '.join(loc_col)}")
+                locs = [loc.strip().replace('.', '').replace(',', '') for loc in loc_years[real_year] if loc and loc.lower() != "n/a"]
+                if locs:
+                    loc_tok = f"in the place of {', '.join(locs)}"
+                    tokens.append(loc_tok)
+                    token_dict["loc"] = loc_tok
+                    special_token_dict["loc"].add(loc_tok)
 
-            # Interactions
+            # Network
             net_years = artist_interact_dict.get(artist, {})
             if real_year in net_years:
-                net_col = []
-                for net in list(net_years[real_year]):
-                    if net:
-                        net_col.append(net.replace('.', '').replace(',', '').strip())
-                
-                if net_col:
-                    phrases.append(f"knew {', '.join(net_col)}")
-                    token_dict["net"] = f"knew {', '.join(net_col)}"
-                    special_token_dict["net"].add(f"knew {', '.join(net_col)}")
+                nets = [net.strip().replace('.', '').replace(',', '') for net in net_years[real_year] if net]
+                if nets:
+                    net_tok = f"knew {', '.join(nets)}"
+                    tokens.append(net_tok)
+                    token_dict["net"] = net_tok
+                    special_token_dict["net"].add(net_tok)
 
-            # Compose prompt
-            caption_content = f"A painting of {content_clean[str(int(image_n))]}"
-            full_prompt = f"{caption_content} by the artist {' '.join(phrases)}."
-
-            all_entries_full.append({
-                "file_name": str(image_path_full),
-                "content": caption_content,
-                "metadata": token_dict,
-            })
-
-            # Token pair combinations
-            phrase_pairs = list(combinations(phrases, 3))
-            shuffle(phrase_pairs)
-
-            for pair in phrase_pairs[:5]:
-                prompt = f"{caption_content} by the artist {' '.join(pair)}."
+            # Select 5 random caption contents
+            for i in range(4):
+                caption_content = f"A painting of {random.choice(content[img_id_str])}"
+                n_style = random.randint(2, len(tokens))
+                indices = sorted(sample(range(len(tokens)), n_style))
+                style_sample = [tokens[i] for i in indices]
+                prompt = f"{caption_content} by the artist {' '.join(style_sample)}."
                 all_entries.append({
                     "file_name": str(image_path),
                     "text": prompt
                 })
 
-# Save output
-jsonl_out.parent.mkdir(parents=True, exist_ok=True)
+                if n_images % 10000 == 0:
+                    print(all_entries[-1])
+
+                if i == 0:
+                    full_prompt = f"{caption_content} by the artist {' '.join(tokens)}."
+                    all_entries_full.append({
+                        "file_name": str(image_path_full),
+                        "content": caption_content,
+                        "metadata": token_dict,
+                    })
+
+# Save training prompts
 with jsonl_out.open("w", encoding="utf-8") as f:
     for entry in all_entries:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
+# Save full prompts (limit to 2000)
 shuffle(all_entries_full)
 with jsonl_out_full.open("w", encoding="utf-8") as f:
     for entry in all_entries_full[:2000]:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
-print(f"✅ Saved {len(all_entries)} training prompts and {len(all_entries_full[:2000])} full prompts for {n} images.")
-print(f"📁 Output directory: {jsonl_out.parent}")
-
-# Build special_token_dict
-# Convert sets to sorted lists
+# Save special token dictionary
 special_token_dict = {k: sorted(list(v)) for k, v in special_token_dict.items()}
-
-# Save to JSON file
-output_path = Path("/raven/u/wangyd/mpib/chm-artistic-social-determinism/Data/natural_prompt_dataset/special_token_dict.json")
 with output_path.open("w", encoding="utf-8") as f:
     json.dump(special_token_dict, f, ensure_ascii=False, indent=2)
 
-print("✅ special_token_dict saved to:")
-print(output_path)
-
+print(f"✅ Saved {len(all_entries)} training prompts and {len(all_entries_full[:2000])} full prompts for {n_images} images.")
+print(f"📁 Output directory: {jsonl_out.parent}")
+print(f"✅ special_token_dict saved to: {output_path}")

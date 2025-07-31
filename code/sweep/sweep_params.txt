@@ -1,8 +1,0 @@
---learning_rate=1e-7 --text_encoder_lr=5e-5 --lr_scheduler=constant
---learning_rate=1e-6 --text_encoder_lr=5e-5 --lr_scheduler=constant
---learning_rate=1e-7 --text_encoder_lr=5e-6 --lr_scheduler=constant
---learning_rate=1e-6 --text_encoder_lr=5e-6 --lr_scheduler=constant
---learning_rate=1e-7 --text_encoder_lr=5e-5 --lr_scheduler=cosine
---learning_rate=1e-6 --text_encoder_lr=5e-5 --lr_scheduler=cosine
---learning_rate=1e-7 --text_encoder_lr=5e-6 --lr_scheduler=cosine
---learning_rate=1e-6 --text_encoder_lr=5e-6 --lr_scheduler=cosine
