@@ -13,3 +13,8 @@ examples/
 model/
 
 .minio.env
+
+optimizer.bin
+random_states_0.pkl
+scaler.pt
+scheduler.bin
