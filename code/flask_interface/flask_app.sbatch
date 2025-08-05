@@ -15,8 +15,10 @@
 # Activate environment
 source ~/mpib/chm-artistic-social-determinism/Art_social_determinism/art_soc/bin/activate
 
+source ~/.minio.env
+
 # Run flask
-python /u/wangyd/mpib/chm-artistic-social-determinism/Art_social_determinism/code/flask_interface/app.py \
-  --token_dict /u/wangyd/mpib/chm-artistic-social-determinism/Data/natural_prompt_dataset/special_token_dict.json \
-  --lora_dir /u/wangyd/mpib/chm-artistic-social-determinism/Art_social_determinism/model/checkpoint-22500 \
-  --output_dir /u/wangyd/mpib/chm-artistic-social-determinism/Data/website_generate
+python app.py \
+  --token_dict special_token_dict.json \
+  --lora_dir /checkpoint-22500 \
+  --use_minio
