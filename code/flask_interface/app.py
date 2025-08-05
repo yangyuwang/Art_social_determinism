@@ -8,15 +8,53 @@ import os
 import argparse
 from io import BytesIO
 from datetime import datetime
+import boto3
+from botocore.client import Config
+from typing import Optional
 
-# Optional MinIO
-try:
-    from minio import Minio
-    MINIO_AVAILABLE = True
-except ImportError:
-    MINIO_AVAILABLE = False
+# ------------------- S3 Helpers -------------------
+
+def get_s3_client():
+    return boto3.client(
+        "s3",
+        endpoint_url=os.environ["MINIO_URL"],
+        aws_access_key_id=os.environ["MINIO_ACCESS_KEY"],
+        aws_secret_access_key=os.environ["MINIO_SECRET_KEY"],
+        config=Config(signature_version="s3v4")
+    )
+
+def upload_bytes_to_s3(
+    image_bytes: BytesIO,
+    bucket_name: Optional[str],
+    s3_key: str,
+    content_type: str = "image/png"
+):
+    if bucket_name is None:
+        bucket_name = os.environ.get("MINIO_BUCKET")
+    assert bucket_name, "MINIO_BUCKET environment variable must be set"
+
+    s3_client = get_s3_client()
+    s3_client.upload_fileobj(
+        Fileobj=image_bytes,
+        Bucket=bucket_name,
+        Key=s3_key,
+        ExtraArgs={"ContentType": content_type}
+    )
+
+def clear_generated_images_from_s3(bucket_name: str, prefix: str = "generated/"):
+    s3_client = get_s3_client()
+    response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+
+    if "Contents" in response:
+        objects_to_delete = [{"Key": obj["Key"]} for obj in response["Contents"]]
+        s3_client.delete_objects(
+            Bucket=bucket_name,
+            Delete={"Objects": objects_to_delete}
+        )
+
 
 # ------------------- Argument Parsing -------------------
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--token_dict", required=True, help="Path to special_token_dict.json")
 parser.add_argument("--lora_dir", required=True, help="Path to LoRA checkpoint directory")
@@ -28,6 +66,7 @@ if not args.use_minio and not args.output_dir:
     raise ValueError("You must specify --output_dir if MinIO is not used.")
 
 # ------------------- Flask Setup -------------------
+
 app = Flask(__name__)
 
 # Load token dictionary
@@ -44,37 +83,15 @@ pipe = StableDiffusion3Pipeline.from_pretrained(
     "stabilityai/stable-diffusion-3-medium-diffusers",
     torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
 ).to(device)
-pipe.load_lora_weights(args.lora_dir)
+pipe.load_lora_weights(
+    args.lora_dir,
+    weight_name="pytorch_lora_weights.safetensors",
+    local_files_only=True
+)
 pipe.set_progress_bar_config(disable=True)
 
-# ------------------- MinIO Setup -------------------
-minio_client = None
-minio_bucket = None
-minio_endpoint = None
-
-if args.use_minio:
-    if not MINIO_AVAILABLE:
-        raise RuntimeError("MinIO not installed. Run: pip install minio")
-
-    minio_endpoint = os.environ.get("MINIO_ENDPOINT")
-    minio_access_key = os.environ.get("MINIO_ACCESS_KEY")
-    minio_secret_key = os.environ.get("MINIO_SECRET_KEY")
-    minio_bucket = os.environ.get("MINIO_BUCKET")
-
-    if not all([minio_endpoint, minio_access_key, minio_secret_key, minio_bucket]):
-        raise ValueError("Missing MinIO credentials in environment variables.")
-
-    minio_client = Minio(
-        minio_endpoint,
-        access_key=minio_access_key,
-        secret_key=minio_secret_key,
-        secure=True
-    )
-
-    if not minio_client.bucket_exists(minio_bucket):
-        minio_client.make_bucket(minio_bucket)
-
 # ------------------- Routes -------------------
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     image_url = None
@@ -98,32 +115,17 @@ def index():
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"generated_{timestamp}.png"
+        minio_path = f"generated/{filename}"
 
         if args.use_minio:
-            minio_path = f"generated/{filename}"
+            minio_bucket = os.environ["MINIO_BUCKET"]
+            # Clear previous images
+            clear_generated_images_from_s3(minio_bucket, prefix="generated/")
             buffer = BytesIO()
             image.save(buffer, format="PNG")
             buffer.seek(0)
-
-            minio_client.put_object(
-                bucket_name=minio_bucket,
-                object_name=minio_path,
-                data=buffer,
-                length=buffer.getbuffer().nbytes,
-                content_type="image/png"
-            )
-
-            # Try presigned URL first (for private buckets)
-            try:
-                image_url = minio_client.presigned_get_object(
-                    bucket_name=minio_bucket,
-                    object_name=minio_path,
-                    expiry=3600
-                )
-            except Exception:
-                # Fallback to public URL
-                image_url = f"https://{minio_endpoint}/{minio_bucket}/{minio_path}"
-
+            upload_bytes_to_s3(buffer, bucket_name=minio_bucket, s3_key=minio_path)
+            image_url = f"/image/{minio_path}"
         else:
             out_path = Path(args.output_dir) / filename
             out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -137,11 +139,22 @@ def index():
     )
 
 @app.route("/generated/<filename>")
-def serve_image(filename):
+def serve_image_local(filename):
     if args.use_minio:
-        return "Local serving is disabled when using MinIO.", 404
+        return "Local image serving is disabled when using MinIO.", 404
     return send_file(Path(args.output_dir) / filename, mimetype="image/png")
 
+@app.route("/image/<path:key>")
+def serve_image_minio(key):
+    bucket = os.environ["MINIO_BUCKET"]
+    s3 = get_s3_client()
+    try:
+        obj = s3.get_object(Bucket=bucket, Key=key)
+        return send_file(obj["Body"], mimetype=obj["ContentType"])
+    except Exception as e:
+        return f"Failed to retrieve: {e}", 404
+
 # ------------------- Run -------------------
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=7860, debug=True)

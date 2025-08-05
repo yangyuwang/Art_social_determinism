@@ -15,10 +15,10 @@
 # Activate environment
 source ~/mpib/chm-artistic-social-determinism/Art_social_determinism/art_soc/bin/activate
 
-source ~/.minio.env
+source .minio.env
 
 # Run flask
 python app.py \
   --token_dict special_token_dict.json \
-  --lora_dir /checkpoint-22500 \
+  --lora_dir checkpoint-22500 \
   --use_minio

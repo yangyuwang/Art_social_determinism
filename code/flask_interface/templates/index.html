@@ -304,15 +304,14 @@
       <!-- RIGHT PANEL -->
         {% if image_url %}
           <div class="image-display">
-            {% if image_url.startswith("http") %}
-              <img src="{{ image_url }}" alt="Generated Painting" onclick="openModal(this)">
-            {% else %}
-              <img src="{{ url_for('serve_image', filename=image_url.split('/')[-1]) }}" alt="Generated Painting" onclick="openModal(this)">
+            {% if image_url %}
+              {% if image_url.startswith("/image/") %}
+                <img src="{{ url_for('serve_image_minio', key=image_url.split('/', 2)[-1]) }}" alt="Generated Painting" onclick="openModal(this)">
+              {% else %}
+                <img src="{{ url_for('serve_image_local', filename=image_url.split('/')[-1]) }}" alt="Generated Painting" onclick="openModal(this)">
+              {% endif %}
             {% endif %}
           </div>
-          <p style="margin-top: 1rem; color: var(--muted); font-size: 0.95rem;">
-            Prompt: {{ request.form.content or '' }}
-          </p>
         {% endif %}
     </div>
 
