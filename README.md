@@ -1,11 +1,119 @@
 # Art_social_determinism
 
+Codebase for the *Art Social Determinism* project, a collaborative research initiative between the **Max Planck Institute for Human Development (CHM)** and the **Knowledge Lab at the University of Chicago**.
+
+---
+
+## Research Intuition & Questions
+
+**Is artistic form the result of personal agency or social constraint?**
+
+- **Humanities Perspective — The Individualistic View of Culture**  
+  Culture arises from exceptional creativity and personal expression.  
+  *Key thinkers:* Kant (1790), Nietzsche (1872), Bloom (1973)
+
+- **Social Sciences Perspective — The Collectivist View of Culture**  
+  Culture is shaped by shared norms, institutions, and social structures.  
+  *Key thinkers:* Bourdieu (1993), Becker (1982), Geertz (1973), Gorin et al. (2025)
+
+
+## Current Research Pipeline
+
+### 1. Prompt Construction  
+*See:* [`code/prompt_making`](code/prompt_making)
+
+Prompts are designed to simulate naturalistic image descriptions, combining both **content** and **style** elements:
+
+- **Content prompts**:  
+  Generated using *LLaVA v1.6* image captioning.
+  
+- **Style prompts**:  
+  Synthesized from *Wikipedia texts* using *GPT-3.5-turbo (o3)*.
+
+Each image receives 5 unique prompts, combining:
+- A randomly sampled content caption
+- _N_ randomly sampled style attributes from: `name`, `year`, `style`, `gender`, `location`, `network`
+
+### 2. Model Training via LoRA DreamBooth on Stable Diffusion 3  
+*See:* [`code/training_script`](code/training_script)
+
+Fine-tuning conducted using [LoRA](https://arxiv.org/abs/2106.09685) and [DreamBooth](https://arxiv.org/abs/2208.12242) on top of **Stable Diffusion 1.5**/**Stable Diffusion 3**, incorporating structured prompts.
+
+### 3. Evaluation & Validation  
+*See:* [`code/painting_test`](code/painting_test)
+
+Evaluation conducted on a held-out sample of **2,000 paintings**, across varied prompt configurations to assess stylistic fidelity and representational realism.
+
+Validation Results:
+
+![](imgs/sim_step_epoch.png)
+
+### 4. Interactive Web Interface  
+*See:* [`code/flask_interface`](code/flask_interface)
+
+Flask-based demo app for conditional image generation using trained models. Supports structured input via selectable attributes.
+
+---
+
+## 🚧 Next Steps
+
+### 1. Enrich Metadata
+
+- **From existing data**:
+  - Add attributes such as `age`, `education`, `nationality`, `religion`, and `parents’ background` (requires re-extraction)
+
+- **From external sources**:
+  - Integrate contextual factors such as `wars`, `social movements`, or `political regimes` (requires historical research and knowledge graphs)
+
+---
+
+### 2. Model Extension to Stable Diffusion 1.5
+
+- Conduct comparative experiments using SD 1.5 with the same prompt schema
+- Analyze differences in semantic control, fidelity, and alignment
+
+---
+
+## 🔮 Future Directions
+
+### 1. Tool Development
+
+- **Public-facing**:  
+  Educational and interactive tools for understanding the social construction of art
+
+- **Expert-facing**:  
+  Interfaces for researchers to refine prompts and test model sensitivity
+
+---
+
+### 2. Quantifying Social Determinism in Art
+
+- Develop predictive models to assess how much of artistic form can be statistically explained by social variables
+- Compare individual vs. structural contributions to aesthetic choices across time and geography
+
+---
+
+## 🧾 Citation
+
+Please cite this project as:
+
+> Wang, Y., & Collaborators (2025). *Art Social Determinism: Modeling the Interplay Between Personal Expression and Social Structure in Artistic Production*. Max Planck Institute for Human Development & University of Chicago Knowledge Lab.
+
 Code for art social determinism project ongoing in MPIB CHM & UChicago KLab.
 
 ## Research Intuitives & Questions:
 
+Is artistic form the result of personal agency or social constraint?
 
-## What we have done:
+__Humanity - Individualistic view of culture:__
+
+Culture arises from exceptional creativity and personal expression (Kant, 1790; Nietzsche, 1872; Bloom, 1973)
+
+__Social Sciences - Collectivism view of culture:__
+
+Culture is shaped by shared norms, institutions, and social structures (Bourdieu, 1993; Becker, 1982; Geertz, 1973; Gorin et al., 2025)
+
+## Current Research Pipeline:
 
 ### Prompt Making:
 
@@ -39,9 +147,19 @@ see folder [code/flask_interface](code/flask_interface)
 
 ### 1. Adding more information:
 
-    a. more from existing information, such as age, education, nationality, religion, and parents info (need to extract again)
+a. more from existing information, such as age, education, nationality, religion, and parents info (need to extract again)
 
-    b. more from external sources, such as wars, social movements, ... (need to search)
+b. more from external sources, such as wars, social movements, ... (need to search)
 
-### 2. Another model?
+### 2. SD 1.5
 
+
+## Future Directions:
+
+### 1. Tools:
+
+*Public - hci, educational purpose
+
+_Experts - refinement_
+
+### 2. Predictability of social factors on arts
