@@ -13,6 +13,8 @@ Codebase for the *Art Social Determinism* project, a collaborative research init
 
 ## Current Research Pipeline
 
+![](imgs/pipeline.png)
+
 ### 1. Prompt Construction  
 *See:* [`code/prompt_making`](code/prompt_making)
 
@@ -25,8 +27,7 @@ b. **Style prompts**:
 Synthesized from *Wikipedia texts* using *GPT-o3*.
 
 Each image receives 5 unique prompts, combining:
-
-A randomly sampled content caption (different lengths) + _N_ randomly sampled style attributes from: `name`, `year`, `style`, `gender`, `location`, `network`
+__A randomly sampled content caption__ (different lengths) + ___N_ randomly sampled style attributes__ from: `name`, `year`, `style`, `gender`, `location`, `network`
 
 ### 2. Model Training via LoRA DreamBooth on Stable Diffusion 3  
 *See:* [`code/training_script`](code/training_script)
@@ -84,3 +85,16 @@ Develop validation methods to assess how much of artistic form can be statistica
 
 Compare individual vs. structural contributions to aesthetic choices across time and geography.
 
+## Requirements & Files
+
+This project requires **Python 3.10+**.
+
+To install all necessary Python packages, run:
+
+```bash
+pip install -r requirements.txt
+```
+
+All used files are saved directly to **MinIO** using an S3-compatible interface via `boto3`.  
+
+Make sure the following environment variables are set: `MINIO_URL`, `MINIO_ACCESS_KEY`, `MINIO_SECRET_KEY`, `MINIO_BUCKET`
