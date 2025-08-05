@@ -11,3 +11,5 @@ sweep_params.txt
 examples/
 
 model/
+
+.minio.env
