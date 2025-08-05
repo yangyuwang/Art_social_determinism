@@ -18,3 +18,6 @@ optimizer.bin
 random_states_0.pkl
 scaler.pt
 scheduler.bin
+
+modified_train_dreambooth_sd3.py
+cont_train_dreambooth_lora_sd3_sweep.sbatch
