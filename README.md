@@ -2,19 +2,13 @@
 
 Codebase for the *Art Social Determinism* project, a collaborative research initiative between the **Max Planck Institute for Human Development (CHM)** and the **Knowledge Lab at the University of Chicago**.
 
----
-
 ## Research Intuition & Questions
 
 **Is artistic form the result of personal agency or social constraint?**
 
-- **Humanities Perspective — The Individualistic View of Culture**  
-  Culture arises from exceptional creativity and personal expression.  
-  *Key thinkers:* Kant (1790), Nietzsche (1872), Bloom (1973)
+1. **Humanities Perspective — The Individualistic View of Culture**: Culture arises from exceptional creativity and personal expression. (Kant, 1790;Nietzsche, 1872; Bloom, 1973)
 
-- **Social Sciences Perspective — The Collectivist View of Culture**  
-  Culture is shaped by shared norms, institutions, and social structures.  
-  *Key thinkers:* Bourdieu (1993), Becker (1982), Geertz (1973), Gorin et al. (2025)
+2. **Social Sciences Perspective — The Collectivist View of Culture**: Culture is shaped by shared norms, institutions, and social structures. (Bourdieu, 1993; Becker, 1982; Geertz, 1973; Gorin et al., 2025)
 
 
 ## Current Research Pipeline
@@ -24,15 +18,15 @@ Codebase for the *Art Social Determinism* project, a collaborative research init
 
 Prompts are designed to simulate naturalistic image descriptions, combining both **content** and **style** elements:
 
-- **Content prompts**:  
-  Generated using *LLaVA v1.6* image captioning.
+a. **Content prompts**:  
+Generated using *LLaVA v1.6* image captioning.
   
-- **Style prompts**:  
-  Synthesized from *Wikipedia texts* using *GPT-3.5-turbo (o3)*.
+b. **Style prompts**:  
+Synthesized from *Wikipedia texts* using *GPT-o3*.
 
 Each image receives 5 unique prompts, combining:
-- A randomly sampled content caption
-- _N_ randomly sampled style attributes from: `name`, `year`, `style`, `gender`, `location`, `network`
+
+A randomly sampled content caption (different lengths) + _N_ randomly sampled style attributes from: `name`, `year`, `style`, `gender`, `location`, `network`
 
 ### 2. Model Training via LoRA DreamBooth on Stable Diffusion 3  
 *See:* [`code/training_script`](code/training_script)
@@ -53,113 +47,40 @@ Validation Results:
 
 Flask-based demo app for conditional image generation using trained models. Supports structured input via selectable attributes.
 
----
+Interface Snapshot:
 
-## 🚧 Next Steps
+![](imgs/interface_snapshot.png)
+
+## Next Steps
 
 ### 1. Enrich Metadata
 
-- **From existing data**:
-  - Add attributes such as `age`, `education`, `nationality`, `religion`, and `parents’ background` (requires re-extraction)
+a. **From existing data**:
 
-- **From external sources**:
-  - Integrate contextual factors such as `wars`, `social movements`, or `political regimes` (requires historical research and knowledge graphs)
+Add attributes such as `age`, `education`, `nationality`, `religion`, and `parents’ background` (some require re-extraction).
 
----
+b. **From external sources**:
+
+Integrate contextual factors such as `wars`, `social movements`, or `political regimes` (requires historical database, for example [Correlates of War](https://correlatesofwar.org/data-sets/cow-war/)).
 
 ### 2. Model Extension to Stable Diffusion 1.5
 
-- Conduct comparative experiments using SD 1.5 with the same prompt schema
-- Analyze differences in semantic control, fidelity, and alignment
+SD 3 has a complex architecture which hard to capture detailed style changes. In a robustness check, SD 1.5 would be used under same prompt schemas.
 
----
 
-## 🔮 Future Directions
+## Future Directions
 
 ### 1. Tool Development
 
-- **Public-facing**:  
-  Educational and interactive tools for understanding the social construction of art
+a. **Public-facing**:  
+Educational and interactive tools for understanding how AI tools would influence opinions towards art.
 
-- **Expert-facing**:  
-  Interfaces for researchers to refine prompts and test model sensitivity
-
----
+b. **Expert-facing**:  
+Interfaces for artist to use (more refinement required).
 
 ### 2. Quantifying Social Determinism in Art
 
-- Develop predictive models to assess how much of artistic form can be statistically explained by social variables
-- Compare individual vs. structural contributions to aesthetic choices across time and geography
+Develop validation methods to assess how much of artistic form can be statistically explained by social variables.
 
----
+Compare individual vs. structural contributions to aesthetic choices across time and geography.
 
-## 🧾 Citation
-
-Please cite this project as:
-
-> Wang, Y., & Collaborators (2025). *Art Social Determinism: Modeling the Interplay Between Personal Expression and Social Structure in Artistic Production*. Max Planck Institute for Human Development & University of Chicago Knowledge Lab.
-
-Code for art social determinism project ongoing in MPIB CHM & UChicago KLab.
-
-## Research Intuitives & Questions:
-
-Is artistic form the result of personal agency or social constraint?
-
-__Humanity - Individualistic view of culture:__
-
-Culture arises from exceptional creativity and personal expression (Kant, 1790; Nietzsche, 1872; Bloom, 1973)
-
-__Social Sciences - Collectivism view of culture:__
-
-Culture is shaped by shared norms, institutions, and social structures (Bourdieu, 1993; Becker, 1982; Geertz, 1973; Gorin et al., 2025)
-
-## Current Research Pipeline:
-
-### Prompt Making:
-
-see folder [code/prompt_making](code/prompt_making)
-
-Prompt for images: 5 random content prompt + _N_ random style prompt
-
-    a. content prompt: generated by LlaVa v1.6 on images
-
-    b. style prompt: generated by gpt-o3 on wikipedia texts
-
-Prompts now follow naturalistic language rules.
-
-Currently only involving name, year, style, gender, location, network
-
-### Training by LoRA DreamBooth on SD3:
-
-see folder [code/training_script](code/training_script)
-
-### Validation Mission:
-
-see folder [code/painting_test](code/painting_test)
-
-randomly-selected 2000 paintings: test on different prompt conditions
-
-### Flask Interface:
-
-see folder [code/flask_interface](code/flask_interface)
-
-## Next Steps:
-
-### 1. Adding more information:
-
-a. more from existing information, such as age, education, nationality, religion, and parents info (need to extract again)
-
-b. more from external sources, such as wars, social movements, ... (need to search)
-
-### 2. SD 1.5
-
-
-## Future Directions:
-
-### 1. Tools:
-
-*Public - hci, educational purpose
-
-_Experts - refinement_
-
-### 2. Predictability of social factors on arts
