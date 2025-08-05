@@ -18,7 +18,7 @@ source ~/mpib/chm-artistic-social-determinism/Art_social_determinism/art_soc/bin
 
 # Paths
 BASE=stabilityai/stable-diffusion-3-medium-diffusers
-LORA_ROOT=/u/wangyd/models/run_lora_natural_20821077
+LORA_ROOT=/u/wangyd/models/run_lora_natural_21012656
 JSONL=/u/wangyd/mpib/chm-artistic-social-determinism/Data/natural_prompt_dataset/full.jsonl
 
 # Checkpoints every 2500 steps from 2500 to 40000
