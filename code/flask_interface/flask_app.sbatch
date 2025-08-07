@@ -20,5 +20,5 @@ source .minio.env
 # Run flask
 python app.py \
   --token_dict special_token_dict.json \
-  --lora_dir checkpoint-22500 \
+  --lora_dir checkpoint-35000 \
   --use_minio
