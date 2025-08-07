@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 step = "step35000"
 base_test_path = Path("/u/wangyd/mpib/chm-artistic-social-determinism/Data/test") / step / "generated"
 real_path = Path("/u/wangyd/mpib/chm-artistic-social-determinism/Data/dreambooth_dataset/train")
+shared_output_path = Path("/u/wangyd/mpib/chm-artistic-social-determinism/Art_social_determinism/imgs") / f"painting_{step}"
+shared_output_path.mkdir(parents=True, exist_ok=True)
 
 # Folder and label mappings
 keys_order = ["real", "c", "t1", "t2", "t3", "t4", "t5", "t6", "t-all"]
@@ -44,7 +46,7 @@ labels = {
 c_folder = base_test_path / "C"
 available_ids = [int(f.replace("_c.png", "")) for f in os.listdir(c_folder) if f.endswith("_c.png") and f.replace("_c.png", "").isdigit()]
 
-# Randomly sample 2 IDs
+# You can random.sample(available_ids, 2) to just pick 2
 random_ids = available_ids
 
 # -------------------------------
@@ -52,7 +54,7 @@ random_ids = available_ids
 # -------------------------------
 
 for id_val in random_ids:
-    fig, axs = plt.subplots(2, 5, figsize=(20, 8))
+    fig, axs = plt.subplots(2, 5, figsize=(12, 5))  # smaller figure size
     axs = axs.flatten()
 
     for idx, key in enumerate(keys_order + ["blank"]):  # Add one empty tile for symmetry
@@ -79,10 +81,14 @@ for id_val in random_ids:
             ax.text(0.5, 0.5, "Missing", ha="center", va="center", fontsize=10)
 
         ax.axis("off")
-        ax.set_title(labels.get(key, ""), fontsize=12)
+        ax.set_title(labels.get(key, ""), fontsize=10)
 
     plt.tight_layout()
-    out_path = base_test_path / f"painting_{id_val}.png"
-    plt.savefig(out_path, dpi=300)
+
+    # Save to both locations
+    fname = f"painting_{id_val}.png"
+    plt.savefig(base_test_path / fname, dpi=200)
+    plt.savefig(shared_output_path / fname, dpi=200)
     plt.close()
-    print(f"✅ Saved: {out_path}")
+
+    print(f"✅ Saved: {fname} to both output directories.")
