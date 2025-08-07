@@ -41,7 +41,15 @@ Evaluation conducted on a held-out sample of **2,000 paintings**, across varied 
 
 Validation Results:
 
+1. Quantitative validation
+
 ![](imgs/sim_step_epoch.png)
+
+2. Qualitative validation: see folder [`imgs/painting_step35000`](imgs/painting_step35000)
+
+![](imgs/painting_step35000/painting_50157.png)
+
+![](imgs/painting_step35000/painting_188120.png)
 
 ### 4. Interactive Web Interface  
 *See:* [`code/flask_interface`](code/flask_interface)
